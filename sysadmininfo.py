@@ -25,7 +25,7 @@ import os
 # Orange (Warning) = \033[93m
 # Red (Error) = \033[91m
 
-## Global print variables
+## Global Print Variables
 
 print_openrc = ("\n\033[92m\trc-status:\033[0m")
 print_sysd = ("\n\033[92m\tsystemctl-status:\033[0m")
@@ -51,23 +51,38 @@ print_cron_weekly = ("\n\033[92m\t/etc/cron.weekly/:\033[0m")
 print_cron_weekly_ = ("\n\033[93m\t/etc/cron.weekly/ does not exist\033[0m")
 print_cron_monthly = ("\n\033[92m\t/etc/cron.monthly/:\033[0m")
 print_cron_monthly_ = ("\n\033[93m\t/etc/cron.monthly/ does not exist\033[0m")
-print_log = ("\n\033[92m\t/var/log:\033[0m")
-print_log_ = ("\n\033[93m\t/var/log/ does not exist\033[0m")
+print_logs = ("\n\033[92m\t/var/log:\033[0m")
+print_logs_ = ("\n\033[93m\t/var/log/ does not exist\033[0m")
 perm_denied = ("\n\033[91m\tPermission denied\033[0m")
 
-# Init system
+# Global File/Path Variables
 
-def _init():
-    rc_filename = '/etc/rc.conf'
-    sysd_filename = '/etc/systemd'
-    runit_filename = '/var/service'
-    if os.path.isfile(rc_filename):
+mounts_filename = '/proc/mounts'
+hosts_filename = '/etc/hosts.allow'
+passwd_filename = '/etc/passwd'
+crontab_filename = '/etc/crontab'
+rc_filename = '/etc/rc.conf'
+sysd_filename = '/etc/systemd'
+runit_filename = '/var/service'
+cron_allow_filename = '/etc/cron.allow'
+cron_deny_filename = '/etc/cron.deny'
+
+cron_hourly_pathname = '/etc/cron.hourly'
+cron_daily_pathname = '/etc/cron.daily'
+cron_weekly_pathname = '/etc/cron.weekly'
+cron_monthly_pathname = '/etc/cron.monthly'
+logs = '/var/logs'
+
+## Init System Status Function
+
+def initstatus(file1, file2, file3):
+    if os.path.isfile(file1):
         print (print_openrc)
         os.system('rc-status')
-    elif os.path.isfile(sysd_filename):
+    elif os.path.isfile(file2):
         print (print_sysd)
         os.system('systemctl-status')
-    elif os.path.isfile(runit_filename):
+    elif os.path.isfile(file3):
         print (print_runit)
         if os.access(runit_filename, os.R_OK):
             with open(runit_filename, 'r') as file:
@@ -78,12 +93,15 @@ def _init():
     else:
         print (print_init_)
 
-# Mount
+## Call Init System Status Function
 
-def _mounts():
-    filename = '/proc/mounts'
+initstatus(rc_filename, sysd_filename, runit_filename)
+
+## Read File Function
+
+def readfile(filename, pfilename, pfilename_):
     if os.path.isfile(filename):
-        print (print_mounts)
+        print (pfilename)
         if os.access(filename, os.R_OK):
             with open(filename, 'r') as file:
                 print (file.read())
@@ -91,152 +109,33 @@ def _mounts():
         else:
             print (perm_denied)
     else:
-        print (print_mounts_)
+        print (pfilename_)
 
-# Host
+## Call Read File Function
 
-def _hosts():
-    filename = '/etc/hosts.allow'
-    if os.path.isfile(filename):
-        print (print_hosts)
-        if os.access(filename, os.R_OK):
-            with open(filename, 'r') as file:
-                print (file.read())
-            file.close()
-        else:
-            print (perm_denied)
-    else:
-        print (print_hosts_)
+readfile(mounts_filename, print_mounts, print_mounts_)
+readfile(hosts_filename, print_hosts, print_hosts_)
+readfile(passwd_filename, print_passwd, print_passwd_)
+readfile(cron_allow_filename, print_cron_allow, print_cron_allow_)
+readfile(cron_deny_filename, print_cron_deny, print_cron_deny_)
 
-def _passwd():
-    filename = '/etc/passwd'
-    if os.path.isfile(filename):
-        print (print_passwd)
-        if os.access(filename, os.R_OK):
-            with open(filename, 'r') as file:
-                print (file.read())
-            file.close()
-        else:
-            print (perm_denied)
-    else:
-        print (print_passwd_)
+## List Directory Function
 
-# Cron jobs
-
-def _crontab():
-    filename = '/etc/crontab'
-    if os.path.isfile(filename):
-        print (print_crontab)
-        if os.access(filename, os.R_OK):
-            with open(filename, 'r') as file:
-                print (file.read())
-            file.close()
-        else:
-            print (perm_denied)
-    else:
-        print (print_crontab_)
-
-def _cron_allow():
-    filename = '/etc/cron.allow'
-    if os.path.isfile(filename):
-        print (print_cron_allow)
-        if os.access(filename, os.R_OK):
-            with open(filename, 'r') as file:
-                print (file.read())
-            file.close()
-        else:
-            print (perm_denied)
-    else:
-        print (print_cron_allow_)
-
-def _cron_deny():
-    filename = '/etc/cron.deny'
-    if os.path.isfile(filename):
-        print (print_cron_deny)
-        if os.access(filename, os.R_OK):
-            with open(filename, 'r') as file:
-                print (file.read())
-            file.close()
-        else:
-            print (perm_denied)
-    else:
-        print (print_cron_deny_)
-
-def _cron_hourly():
-    pathname = '/etc/cron.hourly'
+def listdirectory(pathname, pdirectory, pdirectory_):
     if os.path.isdir(pathname):
-        print (print_cron_hourly)
+        print (pdirectory)
         if os.access(pathname, os.R_OK):
             for file in os.listdir(pathname):
                 print (file)
         else:
             print (perm_denied)
     else:
-        print (print_cron_hourly_)
+        print (pdirectory_)
 
-def _cron_daily():
-    pathname = '/etc/cron.daily'
-    if os.path.isdir(pathname):
-        print (print_cron_daily)
-        if os.access(pathname, os.R_OK):
-            for file in os.listdir(pathname):
-                print (file)
-        else:
-            print (perm_denied)
-    else:
-        print (print_cron_daily_)
+## Call List Directory Function
 
-def _cron_weekly():
-    pathname = '/etc/cron.weekly'
-    if os.path.isdir(pathname):
-        print (print_cron_weekly)
-        if os.access(pathname, os.R_OK):
-            for file in os.listdir(pathname):
-                print (file)
-        else:
-            print (perm_denied)
-    else:
-        print (print_cron_weekly_)
-
-def _cron_monthly():
-    pathname = '/etc/cron.monthly'
-    if os.path.isdir(pathname):
-        print (print_cron_monthly)
-        if os.access(pathname, os.R_OK):
-            for file in os.listdir(pathname):
-                print (file)
-        else:
-            print (perm_denied)
-    else:
-        print (print_cron_monthly_)
-
-# Logs
-
-def _log():
-    pathname = '/var/log/'
-    if os.path.isdir(pathname):
-        print (print_log)
-        if os.access(pathname, os.R_OK):
-            for file in os.listdir(pathname):
-                print (file)
-        else:
-            print (perm_denied)
-    else:
-        print (print_log_)
-
-## Main function
-
-def main():
-    _init()
-    _mounts()
-    _hosts()
-    _passwd()
-    _crontab()
-    _cron_allow()
-    _cron_deny()
-    _cron_hourly()
-    _cron_daily()
-    _cron_weekly()
-    _cron_monthly()
-    _log()
-main()
+listdirectory(cron_hourly_pathname, print_cron_hourly, print_cron_hourly_)
+listdirectory(cron_daily_pathname, print_cron_daily, print_cron_daily_)
+listdirectory(cron_weekly_pathname, print_cron_weekly, print_cron_weekly_)
+listdirectory(cron_monthly_pathname, print_cron_monthly, print_cron_monthly_)
+listdirectory(logs, print_logs, print_logs_)
