@@ -64,13 +64,14 @@ perm_denied = '%s Permission denied %s' % (error, escape)
 
 ## Global file/path variables
 
+rc_filename = '/bin/rc-status'
+sysd_filename = '/bin/systemctl-status'
+runit_filename = '/var/service'
+
 mounts_filename = '/proc/mounts'
 hosts_filename = '/etc/hosts.allow'
 passwd_filename = '/etc/passwd'
 crontab_filename = '/etc/crontab'
-rc_filename = '/bin/rc-status'
-sysd_filename = '/bin/systemctl-status'
-runit_filename = '/var/service'
 cron_allow_filename = '/etc/cron.allow'
 cron_deny_filename = '/etc/cron.deny'
 
