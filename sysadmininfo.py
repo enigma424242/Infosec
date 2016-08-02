@@ -20,7 +20,7 @@
 
 import os
 
-## Global Print Variables
+## Global print variables
 
 print_openrc = ("\n\033[92m\trc-status:\033[0m")
 print_sysd = ("\n\033[92m\tsystemctl-status:\033[0m")
@@ -50,6 +50,7 @@ print_logs = ("\n\033[92m\t/var/log:\033[0m")
 print_logs_ = ("\n\033[93m\t/var/log/ does not exist\033[0m")
 perm_denied = ("\n\033[91m\tPermission denied\033[0m")
 
+## Class container
 
 class sysadmin(object):
 
@@ -99,6 +100,7 @@ class sysadmin(object):
         else:
             print (self.file3)
 
+## Call functions
 
 init = sysadmin('/etc/rc.conf', '/etc/systemd', '/var/service')
 init.initstatus()
