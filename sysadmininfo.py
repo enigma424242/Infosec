@@ -20,7 +20,7 @@
 
 import os
 
-## Global print variables
+## Global Print Variables
 
 print_openrc = ("\n\033[92m\trc-status:\033[0m")
 print_sysd = ("\n\033[92m\tsystemctl-status:\033[0m")
@@ -50,26 +50,25 @@ print_logs = ("\n\033[92m\t/var/log:\033[0m")
 print_logs_ = ("\n\033[93m\t/var/log/ does not exist\033[0m")
 perm_denied = ("\n\033[91m\tPermission denied\033[0m")
 
-## Class container
 
 class sysadmin(object):
 
-    def __init__(self, file1, file2, file3):
-        self.file1 = file1
-        self.file2 = file2
-        self.file3 = file3
+    def __init__(self, arg1, arg2, arg3):
+        self.arg1 = arg1
+        self.arg2 = arg2
+        self.arg3 = arg3
 
     def initstatus(self):
-        if os.path.isfile(self.file1):
+        if os.path.isfile(self.arg1):
             print (print_openrc)
             os.system('rc-status')
-        elif os.path.isfile(self.file2):
+        elif os.path.isfile(self.arg2):
             print (print_sysd)
             os.system('systemctl-status')
-        elif os.path.isfile(self.file3):
+        elif os.path.isfile(self.arg3):
             print (print_runit)
-            if os.access(self.file3, os.R_OK):
-                with open(self.file3, 'r') as file:
+            if os.access(self.arg3, os.R_OK):
+                with open(self.arg3, 'r') as file:
                     print (file.read())
                 file.close()
             else:
@@ -78,29 +77,28 @@ class sysadmin(object):
             print (print_init_)
 
     def readfunction(self):
-        if os.path.isfile(self.file1):
-            print (self.file2)
-            if os.access(self.file1, os.R_OK):
-                with open(self.file1, 'r') as file:
-            	    print (file.read())
-            	file.close()
+        if os.path.isfile(self.arg1):
+            print (self.arg2)
+            if os.access(self.arg1, os.R_OK):
+                with open(self.arg1, 'r') as file:
+                    print (file.read())
+                file.close()
             else:
-            	print (perm_denied)
-    	else:
-            print (self.file3)
+                print (perm_denied)
+        else:
+            print (self.arg3)
 
     def listfunction(self):
-        if os.path.isdir(self.file1):
-            print (self.file2)
-            if os.access(self.file1, os.R_OK):
-                for file in os.listdir(self.file1):
+        if os.path.isdir(self.arg1):
+            print (self.arg2)
+            if os.access(self.arg1, os.R_OK):
+                for file in os.listdir(self.arg1):
                     print (file)
             else:
                 print (perm_denied)
         else:
-            print (self.file3)
+            print (self.arg3)
 
-## Call functions
 
 init = sysadmin('/etc/rc.conf', '/etc/systemd', '/var/service')
 init.initstatus()
