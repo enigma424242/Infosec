@@ -101,8 +101,6 @@ def initstatus(file1, file2, file3):
     else:
         print(print_init_)
 
-## Call init system status
-
 initstatus(rc_filename, sysd_filename, runit_filename)
 
 ## Read file
@@ -118,8 +116,6 @@ def readfile(filename, pfilename, pfilename_):
             print(perm_denied)
     else:
         print(pfilename_)
-
-## Call read file
 
 readfile(mounts_filename, print_mounts, print_mounts_)
 readfile(hosts_filename, print_hosts, print_hosts_)
@@ -139,8 +135,6 @@ def listdirectory(pathname, pdirectory, pdirectory_):
             print(perm_denied)
     else:
         print(pdirectory_)
-
-## Call list directory
 
 listdirectory(cron_hourly_pathname, print_cron_hourly, print_cron_hourly_)
 listdirectory(cron_daily_pathname, print_cron_daily, print_cron_daily_)
