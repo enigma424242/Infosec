@@ -2,7 +2,7 @@
 
 ## This shell script searches for error and warnings within syslog-ng /var/log/
 
-## by Enigma
+## By Enigma
 
 if [ -f /var/log/auth.log ]
 	then
