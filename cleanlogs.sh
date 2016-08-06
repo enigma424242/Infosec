@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This shell script empties syslog-ng files
+# This shell script empties syslog-ng /var/log files
 
 # By Enigma
 
