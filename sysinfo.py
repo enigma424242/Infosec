@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # utf-8
 
-## This Python script prints operating system information
+## System Information
 ## By Enigma
 
 ## Notes:
 # * Requires root privilege
 
 ## Compatible:
+# * GNU/Linux
 # * dev-lang/python:2.7 (stable)
 # * dev-lang/python:3.4 (stable)
 
