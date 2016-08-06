@@ -8,7 +8,6 @@
 # * Requires root privilege
 
 ## Compatible:
-# * GNU/Linux
 # * dev-lang/python:2.7 (stable)
 # * dev-lang/python:3.4 (stable)
 
