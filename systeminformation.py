@@ -4,6 +4,9 @@
 # Title: System Information v1.01
 # Author: Enigma
 
+# Python:2.7
+# Python:3.4
+
 import os
 
 class InitSystemStatus(object):
