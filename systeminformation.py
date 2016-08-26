@@ -34,7 +34,7 @@ class FilePath(object):
             else:
                 print("Permission Denied")
         else:
-            print(filename, "Does not exist")
+            print(pathname, "Does not exist")
 
 init = InitSystemStatus()
 path = FilePath()
