@@ -41,7 +41,7 @@ class Phase(object):
     initsystemstatus = {
         'openrc': init.init_status('/bin/rc-status', 'rc-status'),
         'systemd': init.init_status('/bin/systemctl-status', 'systemctl-status')
-        }
+    }
 
     filepath = {
         'mounts': path.file_path('/proc/mounts'),
@@ -55,4 +55,4 @@ class Phase(object):
         'cronweekly': path.file_path('/etc/cron.weekly'),
         'cronmonthly': path.file_path('/etc/cron.monthly'),
         'logs': path.file_path('/var/log')
-        }
+    }
