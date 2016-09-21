@@ -12,7 +12,7 @@ class InitSystemStatus(object):
     def init_status(self, filename, command):
         if os.path.exists(filename):
             print("\n-------")
-            print("Init System Status:")
+            print("Init System Status")
             print("-------\n")
             os.system(command)
 
