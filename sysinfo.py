@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Title: System Information v1.01
 # Author: Enigma
+
+# Prints GNU/Linux operating system information to the terminal.
 
 import os
 
