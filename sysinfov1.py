@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Title: System Information v1.01
 # Author: Enigma
 
 import os
