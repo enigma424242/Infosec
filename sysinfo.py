@@ -41,7 +41,7 @@ class Phase(object):
 
     """ For future updates,
     
-    I set the instance calls as values.
+    I set the instance calls to key and value pairs.
     """
 
     init = InitSystemStatus()
