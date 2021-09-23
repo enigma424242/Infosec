@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # Author: Enigma
-# Description: Prints GNU/Linux operating system information.
+# Description: Prints GNU/Linux operating system information to the console prompt
 
 import os
 
